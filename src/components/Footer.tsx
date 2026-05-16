@@ -21,9 +21,9 @@ const Footer = () => {
           <div>
             <div className="footer-col-title">Studio</div>
             <ul className="footer-links">
-              <li><a href="#about">Our Story</a></li>
+              <li><Link to="/#about">Our Story</Link></li>
               <li><Link to="/projects">Recent Projects</Link></li>
-              <li><a href="#contact">Contact Us</a></li>
+              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </div>
           <div>

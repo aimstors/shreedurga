@@ -20,15 +20,15 @@ const Nav = () => {
           <span className="nav-logo-sub">Est. 1999 · Duliajan, Assam</span>
         </Link>
         <ul className="nav-center">
-          <li><Link to="/" className="active">Home</Link></li>
-          <li><a href="#about">About</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/#about">About</Link></li>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/projects">Projects</Link></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
         <div className="nav-right">
           <a href="tel:+919435754461" className="nav-tel">+91 94357 54461</a>
-          <a href="#contact" className="nav-btn">Book Consultation</a>
+          <Link to="/contact" className="nav-btn">Book Consultation</Link>
         </div>
         <button 
           className="nav-hamburger" 
@@ -44,10 +44,10 @@ const Nav = () => {
           <X size={32} />
         </button>
         <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-        <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
+        <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>About</Link>
         <Link to="/services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
         <Link to="/projects" onClick={() => setMobileMenuOpen(false)}>Projects</Link>
-        <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+        <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
         <a href="tel:+919435754461" className="mm-cta" onClick={() => setMobileMenuOpen(false)}>
           +91 94357 54461
         </a>

@@ -1,0 +1,38 @@
+# ── AWS Deployment Configs ──
+
+# buildspec.yml (for AWS CodeBuild / CodePipeline CI/CD)
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing dependencies..."
+      - cd backend && npm install --production
+  pre_build:
+    commands:
+      - echo "Running pre-build checks..."
+      - node -e "require('./backend/server.js')" --check
+  build:
+    commands:
+      - echo "Build started on $(date)"
+      - echo "Copying frontend to S3..."
+  post_build:
+    commands:
+      - echo "Deploying to EC2 via SSM..."
+      - aws ssm send-command
+          --instance-ids "$EC2_INSTANCE_ID"
+          --document-name "AWS-RunShellScript"
+          --parameters 'commands=["cd /var/www/shreedurga-interior && git pull && cd backend && npm install --production && pm2 reload shreedurga-api"]'
+
+artifacts:
+  files:
+    - frontend/**/*
+    - backend/**/*
+    - DEPLOYMENT.md
+  discard-paths: no
+
+cache:
+  paths:
+    - backend/node_modules/**/*

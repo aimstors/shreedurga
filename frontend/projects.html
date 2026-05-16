@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Shree Durga Interior</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;--bg2:#0a0a0a;--surface:#1c1c1e;--surface2:#2c2c2e;--surface3:#3a3a3c;
+  --divider:rgba(255,255,255,.08);
+  --text:#f5f5f7;--text2:#a1a1a6;--text3:#6e6e73;
+  --accent:#2997ff;--accent2:#30d158;--accent3:#ff9f0a;--accent4:#ff375f;
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',Arial,sans-serif;
+  --radius:18px;--radius-lg:28px;--ease:cubic-bezier(0.25,0.1,0.25,1);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;line-height:1.47}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-size:15px;font-weight:600;letter-spacing:-.01em;color:#fff;text-decoration:none}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;padding:0 12px;transition:color .2s;letter-spacing:-.01em}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:-.01em}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--text2)}
+.nav-mobile-btn svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(20px);z-index:998;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--ease)}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{font-size:28px;font-weight:600;color:var(--text);text-decoration:none;padding:18px 0;letter-spacing:-.03em;display:block;width:100%;text-align:center;border-bottom:1px solid var(--divider)}
+.mobile-menu a:last-child{border-bottom:none;color:var(--accent)}
+
+/* HERO */
+.page-hero{padding:120px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(41,151,255,.08),transparent 60%);pointer-events:none}
+.breadcrumb{font-size:13px;color:var(--text3);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.page-title{font-size:clamp(40px,7vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px;animation:fadeUp .8s .2s both}
+.page-sub{font-size:19px;color:var(--text2);letter-spacing:-.02em;line-height:1.5;animation:fadeUp .8s .35s both;max-width:500px;margin:0 auto}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* FILTER */
+.filter-wrap{padding:0 24px 48px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.filter-btn{background:var(--surface);border:1px solid rgba(255,255,255,.06);color:var(--text2);padding:8px 20px;border-radius:980px;font-family:var(--font);font-size:13px;letter-spacing:-.01em;cursor:pointer;transition:all .2s}
+.filter-btn:hover{background:var(--surface2);color:var(--text)}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* PROJECTS MASONRY */
+.projects-section{padding:0 24px 100px;max-width:1100px;margin:0 auto}
+.projects-hero-grid{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:460px 300px;gap:16px;margin-bottom:16px}
+.projects-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.projects-row-2{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:16px}
+
+/* PROJECT CARD */
+.p-card{border-radius:var(--radius-lg);overflow:hidden;position:relative;cursor:pointer;background:var(--surface)}
+.p-card:first-child{grid-row:span 2}
+.p-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s var(--ease)}
+.p-card:hover .p-card-bg{transform:scale(1.06)}
+.p-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.2) 55%,transparent 100%)}
+.p-card-top{position:absolute;top:20px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:flex-start}
+.p-card-cat{background:rgba(0,0,0,.5);backdrop-filter:blur(12px);border-radius:980px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--text2);letter-spacing:-.01em;border:1px solid rgba(255,255,255,.1)}
+.p-card-badge{background:rgba(41,151,255,.2);backdrop-filter:blur(12px);border:1px solid rgba(41,151,255,.3);border-radius:980px;padding:5px 12px;font-size:11px;font-weight:500;color:var(--accent);letter-spacing:-.01em}
+.p-card-info{position:absolute;bottom:0;left:0;right:0;padding:24px;transform:translateY(4px);transition:transform .4s var(--ease)}
+.p-card:hover .p-card-info{transform:translateY(0)}
+.p-title{font-size:18px;font-weight:600;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px}
+.p-card:first-child .p-title{font-size:24px}
+.p-meta{font-size:13px;color:rgba(245,245,247,.6);letter-spacing:-.01em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.p-meta-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+.p-pill{display:inline-block;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:980px;padding:3px 10px;font-size:11px;border:1px solid rgba(255,255,255,.08)}
+.p-card-hover-detail{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;pointer-events:none}
+.p-card:hover .p-card-hover-detail{opacity:1}
+.p-view-btn{background:rgba(255,255,255,.12);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:980px;padding:10px 24px;font-size:14px;font-weight:500;color:#fff;letter-spacing:-.01em}
+
+/* STATS ROW */
+.stats-row{background:var(--bg2);border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:0}
+.stat-item{padding:40px 20px;text-align:center;border-right:1px solid var(--divider)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:clamp(32px,4vw,44px);font-weight:700;letter-spacing:-.04em;background:linear-gradient(135deg,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
+.stat-label{font-size:13px;color:var(--text3);letter-spacing:-.01em}
+
+/* PROCESS TEASER */
+.teaser{background:var(--bg);padding:100px 24px}
+.teaser-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.teaser-title{font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.04em;line-height:1.15;margin-bottom:16px}
+.teaser-sub{font-size:17px;color:var(--text2);line-height:1.5;letter-spacing:-.01em;margin-bottom:32px}
+.teaser-steps{display:flex;flex-direction:column;gap:20px}
+.t-step{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--surface);border-radius:var(--radius);border:1px solid rgba(255,255,255,.04);transition:background .2s}
+.t-step:hover{background:var(--surface2)}
+.t-step-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.t-step-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.t-step-title{font-size:15px;font-weight:600;letter-spacing:-.02em;margin-bottom:4px}
+.t-step-desc{font-size:13px;color:var(--text3);letter-spacing:-.01em;line-height:1.5}
+
+/* CTA */
+.cta-section{background:var(--bg2);padding:100px 24px}
+.cta-inner{max-width:900px;margin:0 auto;background:var(--surface);border-radius:var(--radius-lg);padding:80px 60px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+.cta-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -20%,rgba(41,151,255,.1),transparent 60%)}
+.cta-title{font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.04em;margin-bottom:12px;position:relative}
+.cta-sub{font-size:17px;color:var(--text2);letter-spacing:-.01em;margin-bottom:36px;position:relative}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-blue{background:var(--accent);color:#fff;border:none;padding:13px 28px;border-radius:980px;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:-.01em;transition:all .2s;font-family:var(--font)}
+.btn-blue:hover{background:#1a86e8;transform:scale(1.02)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:none;padding:13px 28px;border-radius:980px;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:-.01em;transition:all .2s;font-family:var(--font)}
+.btn-ghost:hover{background:rgba(255,255,255,.13)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--divider);padding:60px 24px 40px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--divider)}
+.footer-brand{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.footer-tagline{font-size:13px;color:var(--text3);line-height:1.5;letter-spacing:-.01em;margin-bottom:24px}
+.footer-socials{display:flex;gap:10px}
+.fsoc{width:34px;height:34px;border-radius:9px;background:var(--surface2);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.fsoc:hover{background:var(--surface3)}
+.fsoc svg{width:16px;height:16px;fill:var(--text2)}
+.footer-col-title{font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text2)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:13px;color:var(--text3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-mobile-btn{display:block}
+  .projects-hero-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .p-card:first-child{grid-row:auto;height:320px}
+  .p-card{height:260px}
+  .projects-row,.projects-row-2{grid-template-columns:1fr}
+  .p-card{height:240px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2){border-right:none}
+  .teaser-inner{grid-template-columns:1fr;gap:40px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .cta-inner{padding:48px 28px}
+}
+@media(max-width:430px){
+  .projects-hero-grid .p-card:first-child,.projects-hero-grid .p-card{height:220px}
+  .footer-top{grid-template-columns:1fr}
+  .filter-wrap{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:16px}
+  .filter-btn{flex-shrink:0;white-space:nowrap}
+  .stats-row{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="services.html" onclick="closeMobile()">Services</a>
+  <a href="projects.html" onclick="closeMobile()">Projects</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Shree Durga Interior</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Contact Us</a>
+  <button class="nav-mobile-btn" onclick="toggleMobile()"><svg viewBox="0 0 20 20"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg></button>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Projects</span></div>
+  <h1 class="page-title">850+ spaces<br>transformed.</h1>
+  <p class="page-sub">A curated selection of our finest work across Assam.</p>
+</div>
+
+<div class="filter-wrap">
+  <button class="filter-btn active" onclick="filterProjects('all',this)">All Projects</button>
+  <button class="filter-btn" onclick="filterProjects('kitchen',this)">Kitchens</button>
+  <button class="filter-btn" onclick="filterProjects('living',this)">Living Rooms</button>
+  <button class="filter-btn" onclick="filterProjects('bedroom',this)">Bedrooms</button>
+  <button class="filter-btn" onclick="filterProjects('office',this)">Offices</button>
+  <button class="filter-btn" onclick="filterProjects('ceiling',this)">Ceilings</button>
+</div>
+
+<div class="projects-section">
+
+  <!-- HERO GRID -->
+  <div class="projects-hero-grid">
+    <div class="p-card reveal" data-proj="kitchen living">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top">
+        <span class="p-card-cat">Modular Kitchen</span>
+        <span class="p-card-badge">Featured</span>
+      </div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Modern Modular Kitchen, Duliajan</div>
+        <div class="p-meta"><span>2024</span><span class="p-meta-dot"></span><span>₹4.5 Lakhs</span><span class="p-meta-dot"></span><span class="p-pill">3 weeks</span></div>
+      </div>
+    </div>
+    <div class="p-card reveal reveal-d1" data-proj="living">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Living Room</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Luxury Living Room, Dibrugarh</div>
+        <div class="p-meta"><span>2024</span><span class="p-meta-dot"></span><span>₹3.2 Lakhs</span></div>
+      </div>
+    </div>
+    <div class="p-card reveal reveal-d2" data-proj="office">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Office</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Corporate Office, Guwahati</div>
+        <div class="p-meta"><span>2024</span><span class="p-meta-dot"></span><span>₹8.5 Lakhs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="projects-row">
+    <div class="p-card reveal" style="height:280px" data-proj="bedroom">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Bedroom</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Master Bedroom, Jorhat</div>
+        <div class="p-meta"><span>2024</span><span class="p-meta-dot"></span><span>₹2.1 Lakhs</span></div>
+      </div>
+    </div>
+    <div class="p-card reveal reveal-d1" style="height:280px" data-proj="ceiling">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6d349947?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">False Ceiling</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">POP Ceiling Design, Tinsukia</div>
+        <div class="p-meta"><span>2023</span><span class="p-meta-dot"></span><span>₹1.8 Lakhs</span></div>
+      </div>
+    </div>
+    <div class="p-card reveal reveal-d2" style="height:280px" data-proj="kitchen">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Kitchen</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Compact Kitchen, Sibsagar</div>
+        <div class="p-meta"><span>2023</span><span class="p-meta-dot"></span><span>₹2.8 Lakhs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="projects-row-2">
+    <div class="p-card reveal" style="height:320px" data-proj="living bedroom">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=800&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Full Home Interior</span><span class="p-card-badge">Awarded</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Full Home Renovation, Assam</div>
+        <div class="p-meta"><span>2023</span><span class="p-meta-dot"></span><span>₹18 Lakhs</span><span class="p-meta-dot"></span><span class="p-pill">8 weeks</span></div>
+      </div>
+    </div>
+    <div class="p-card reveal reveal-d1" style="height:320px" data-proj="office">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=700&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Office Interior</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View Project</div></div>
+      <div class="p-card-info">
+        <div class="p-title">Modern Workspace, Duliajan</div>
+        <div class="p-meta"><span>2023</span><span class="p-meta-dot"></span><span>₹5.5 Lakhs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div class="projects-row">
+    <div class="p-card reveal" style="height:260px" data-proj="bedroom">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Bedroom</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View</div></div>
+      <div class="p-card-info"><div class="p-title">Kids Bedroom, Dibrugarh</div><div class="p-meta"><span>2023</span></div></div>
+    </div>
+    <div class="p-card reveal reveal-d1" style="height:260px" data-proj="living">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Living Room</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View</div></div>
+      <div class="p-card-info"><div class="p-title">Contemporary Lounge, Assam</div><div class="p-meta"><span>2022</span></div></div>
+    </div>
+    <div class="p-card reveal reveal-d2" style="height:260px" data-proj="ceiling kitchen">
+      <div class="p-card-bg" style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80')"></div>
+      <div class="p-card-overlay"></div>
+      <div class="p-card-top"><span class="p-card-cat">Interior + Ceiling</span></div>
+      <div class="p-card-hover-detail"><div class="p-view-btn">View</div></div>
+      <div class="p-card-info"><div class="p-title">Premium Apartment, Jorhat</div><div class="p-meta"><span>2022</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item"><div class="stat-num" data-target="850" data-suffix="+">0</div><div class="stat-label">Projects completed</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="25">0</div><div class="stat-label">Years of excellence</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="98" data-suffix="%">0</div><div class="stat-label">Client satisfaction</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="12">0</div><div class="stat-label">Design awards</div></div>
+</div>
+
+<!-- PROCESS TEASER -->
+<section class="teaser">
+  <div class="teaser-inner">
+    <div>
+      <div style="font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:12px" class="reveal">Our approach</div>
+      <h2 class="teaser-title reveal">Every project, the same meticulous care.</h2>
+      <p class="teaser-sub reveal">From first consultation to final handover, our proven five-step process ensures your vision is realised perfectly — on time and within budget.</p>
+      <a href="services.html" class="btn-blue reveal" style="display:inline-block">Explore All Services</a>
+    </div>
+    <div class="teaser-steps reveal reveal-d1">
+      <div class="t-step">
+        <div class="t-step-icon" style="background:rgba(41,151,255,.1);color:var(--accent)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div><div class="t-step-title">01 · Consultation</div><div class="t-step-desc">We understand your vision, space, and budget.</div></div>
+      </div>
+      <div class="t-step">
+        <div class="t-step-icon" style="background:rgba(48,209,88,.1);color:var(--accent2)"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg></div>
+        <div><div class="t-step-title">02 · 3D Design</div><div class="t-step-desc">Photorealistic renders before a single nail.</div></div>
+      </div>
+      <div class="t-step">
+        <div class="t-step-icon" style="background:rgba(255,159,10,.1);color:var(--accent3)"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div><div class="t-step-title">03 · Execution & Handover</div><div class="t-step-desc">Expert craftsmanship, delivered on time.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">Your project could be next.</h2>
+    <p class="cta-sub">Book a free consultation and let's start planning your transformation.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn-blue">Get a Free Quote</a>
+      <a href="tel:+919435754461" class="btn-ghost">Call Now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Shree Durga Interior</div>
+        <p class="footer-tagline">Transforming spaces with passion and precision since 1999.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/shreedurgainterior" class="fsoc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://wa.me/+919435754461" class="fsoc"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="services.html">Interior Design</a></li><li><a href="services.html">Modular Kitchen</a></li><li><a href="services.html">Office Interior</a></li><li><a href="services.html">False Ceiling</a></li></ul></div>
+      <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="tel:+919435754461">+91 94357 54461</a></li><li><a href="#">shreedurgainterior50@gmail.com</a></li><li><a href="#">Duliajan, Assam</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Shree Durga Interior. All rights reserved.</span>
+      <span class="footer-copy">Duliajan, Assam · India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+const ro=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+const co=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){animCount(el.target);co.unobserve(el.target)}})},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
+function animCount(el){const t=+el.dataset.target,s=el.dataset.suffix||'';let n=0;const step=t/60;const ti=setInterval(()=>{n=Math.min(n+step,t);el.textContent=Math.round(n)+s;if(n>=t)clearInterval(ti)},16)}
+function filterProjects(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('[data-proj]').forEach(el=>{
+    const match=cat==='all'||el.dataset.proj.includes(cat);
+    el.style.transition='opacity .35s,transform .35s';
+    el.style.opacity=match?'1':'0.15';
+    el.style.transform=match?'scale(1)':'scale(0.97)';
+  });
+}
+</script>
+</body>
+</html>

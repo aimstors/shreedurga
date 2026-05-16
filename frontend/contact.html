@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Shree Durga Interior</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;--bg2:#0a0a0a;
+  --surface:#1c1c1e;--surface2:#2c2c2e;--surface3:#3a3a3c;
+  --divider:rgba(255,255,255,.08);
+  --text:#f5f5f7;--text2:#a1a1a6;--text3:#6e6e73;
+  --accent:#2997ff;--accent2:#30d158;--accent3:#ff9f0a;
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',Arial,sans-serif;
+  --radius:18px;--radius-sm:12px;--radius-lg:28px;
+  --ease:cubic-bezier(0.25,0.1,0.25,1);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;line-height:1.47}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-size:15px;font-weight:600;letter-spacing:-.01em;color:#fff;text-decoration:none}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;padding:0 12px;transition:color .2s;letter-spacing:-.01em}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:-.01em}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--text2)}
+.nav-mobile-btn svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.mobile-menu{position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(20px);z-index:998;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--ease)}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{font-size:28px;font-weight:600;color:var(--text);text-decoration:none;padding:18px 0;letter-spacing:-.03em;display:block;width:100%;text-align:center;border-bottom:1px solid var(--divider)}
+.mobile-menu a:last-child{border-bottom:none;color:var(--accent)}
+
+/* PAGE HERO */
+.page-hero{padding:120px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(41,151,255,.08),transparent 60%);pointer-events:none}
+.breadcrumb{font-size:13px;color:var(--text3);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.page-title{font-size:clamp(40px,7vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px;animation:fadeUp .8s .2s both}
+.page-sub{font-size:19px;color:var(--text2);letter-spacing:-.02em;line-height:1.5;animation:fadeUp .8s .35s both;max-width:480px;margin:0 auto}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* QUICK CONTACT */
+.quick-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);background:var(--bg2)}
+.quick-item{padding:36px 32px;display:flex;align-items:center;gap:18px;border-right:1px solid var(--divider);text-decoration:none;transition:background .2s;cursor:pointer}
+.quick-item:last-child{border-right:none}
+.quick-item:hover{background:var(--surface)}
+.q-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.q-label{font-size:12px;color:var(--text3);letter-spacing:.02em;margin-bottom:5px}
+.q-value{font-size:16px;font-weight:600;letter-spacing:-.03em;color:var(--text)}
+.q-sub{font-size:12px;color:var(--text3);margin-top:3px;letter-spacing:-.01em}
+
+/* MAIN LAYOUT */
+.contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:0;border-bottom:1px solid var(--divider);min-height:80vh}
+
+/* INFO PANEL */
+.info-panel{padding:80px 60px;background:var(--bg2);border-right:1px solid var(--divider)}
+.info-eyebrow{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.info-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.04em;line-height:1.15;margin-bottom:20px}
+.info-desc{font-size:15px;color:var(--text2);line-height:1.6;letter-spacing:-.01em;margin-bottom:48px}
+.info-items{display:flex;flex-direction:column;gap:0;margin-bottom:48px}
+.info-item{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--divider)}
+.info-item:first-child{border-top:1px solid var(--divider)}
+.info-icon{width:38px;height:38px;border-radius:10px;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.info-item:hover .info-icon{background:var(--surface2)}
+.info-icon svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.info-item-label{font-size:12px;color:var(--text3);letter-spacing:-.01em;margin-bottom:4px}
+.info-item-value{font-size:15px;font-weight:500;letter-spacing:-.02em;line-height:1.4}
+.info-item-value a{color:var(--accent);text-decoration:none}
+.info-item-value a:hover{opacity:.8}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.hours-block{font-size:13px}
+.hours-day{color:var(--text3);letter-spacing:-.01em}
+.hours-time{color:var(--text2);margin-top:2px;letter-spacing:-.01em}
+.social-row{display:flex;gap:10px;flex-wrap:wrap}
+.soc-pill{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:980px;padding:8px 18px;font-size:13px;color:var(--text2);text-decoration:none;transition:all .2s;letter-spacing:-.01em}
+.soc-pill:hover{background:var(--surface2);color:var(--text)}
+.soc-pill svg{width:15px;height:15px;fill:currentColor}
+
+/* FORM PANEL */
+.form-panel{padding:80px 60px;background:var(--bg)}
+.form-eyebrow{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.form-title{font-size:clamp(26px,3.5vw,36px);font-weight:700;letter-spacing:-.04em;line-height:1.15;margin-bottom:40px}
+
+/* FORM ELEMENTS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:13px;font-weight:500;color:var(--text2);letter-spacing:-.01em;margin-bottom:8px}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.06);
+  border-radius:var(--radius-sm);color:var(--text);
+  font-family:var(--font);font-size:15px;font-weight:400;
+  padding:14px 16px;letter-spacing:-.01em;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3);font-size:14px}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(41,151,255,.12)}
+.form-select{cursor:pointer;color:var(--text2)}
+.form-select option{background:var(--surface);color:var(--text)}
+.form-select.filled{color:var(--text)}
+.form-textarea{resize:none;height:130px;line-height:1.6}
+
+/* SERVICE CHIPS */
+.service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:980px;padding:8px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .2s;letter-spacing:-.01em;user-select:none}
+.chip:hover{background:var(--surface2);color:var(--text)}
+.chip.selected{background:rgba(41,151,255,.12);border-color:rgba(41,151,255,.3);color:var(--accent)}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0;transition:opacity .2s;flex-shrink:0}
+.chip.selected .chip-dot{opacity:1}
+
+/* BUDGET SLIDER */
+.budget-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.budget-btn{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-sm);padding:12px 8px;font-family:var(--font);font-size:12px;color:var(--text2);cursor:pointer;transition:all .2s;text-align:center;letter-spacing:-.01em;line-height:1.3}
+.budget-btn:hover{background:var(--surface2);color:var(--text)}
+.budget-btn.selected{background:rgba(41,151,255,.1);border-color:rgba(41,151,255,.3);color:var(--accent)}
+
+/* SUBMIT */
+.form-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:8px}
+.form-note{font-size:13px;color:var(--text3);letter-spacing:-.01em;line-height:1.5}
+.btn-submit{background:var(--accent);color:#fff;border:none;padding:15px 36px;border-radius:980px;font-family:var(--font);font-size:16px;font-weight:600;cursor:pointer;letter-spacing:-.02em;transition:all .2s;display:inline-flex;align-items:center;gap:10px;position:relative;overflow:hidden}
+.btn-submit:hover{background:#1a86e8;transform:scale(1.02)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-submit svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;transition:transform .2s}
+.btn-submit:hover svg{transform:translateX(3px)}
+
+/* SUCCESS */
+.form-success{display:none;text-align:center;padding:60px 20px}
+.success-icon{width:68px;height:68px;background:rgba(48,209,88,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;border:1px solid rgba(48,209,88,.2)}
+.success-icon svg{width:28px;height:28px;stroke:var(--accent2);fill:none;stroke-width:2.5;stroke-linecap:round}
+.success-title{font-size:28px;font-weight:700;letter-spacing:-.04em;margin-bottom:10px}
+.success-desc{font-size:15px;color:var(--text2);line-height:1.6;letter-spacing:-.01em;margin-bottom:32px}
+
+/* MAP */
+.map-section{background:var(--bg2);border-top:1px solid var(--divider)}
+.map-inner{display:grid;grid-template-columns:1fr 2fr}
+.map-info{padding:60px 48px;border-right:1px solid var(--divider)}
+.map-info-title{font-size:24px;font-weight:700;letter-spacing:-.04em;margin-bottom:28px}
+.map-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:20px}
+.map-detail-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:1px}
+.map-detail-text{font-size:14px;color:var(--text2);line-height:1.6;letter-spacing:-.01em}
+.map-detail-text strong{display:block;color:var(--text);font-weight:500;margin-bottom:3px;font-size:15px}
+.map-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:500;color:var(--accent);text-decoration:none;letter-spacing:-.01em;transition:gap .2s}
+.map-link:hover{gap:12px}
+.map-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.map-embed{position:relative;background:var(--surface);min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.map-pin-anim{width:60px;height:60px;border-radius:50%;background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.2);display:flex;align-items:center;justify-content:center;animation:mapPulse 2.5s ease-in-out infinite}
+.map-pin-anim svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round}
+@keyframes mapPulse{0%,100%{box-shadow:0 0 0 0 rgba(41,151,255,.2)}60%{box-shadow:0 0 0 20px rgba(41,151,255,0)}}
+.map-place-name{font-size:17px;font-weight:600;letter-spacing:-.03em}
+.map-place-sub{font-size:13px;color:var(--text3);letter-spacing:-.01em}
+.map-open-btn{margin-top:8px;background:var(--surface2);border:1px solid rgba(255,255,255,.06);border-radius:980px;padding:10px 22px;font-family:var(--font);font-size:13px;font-weight:500;color:var(--accent);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em}
+.map-open-btn:hover{background:var(--surface3)}
+.map-open-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* FAQ */
+.faq-section{padding:100px 24px;background:var(--bg)}
+.faq-inner{max-width:800px;margin:0 auto}
+.faq-eyebrow{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;text-align:center}
+.faq-title{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.04em;text-align:center;margin-bottom:48px}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{background:var(--surface);border-radius:var(--radius);border:1px solid rgba(255,255,255,.04);overflow:hidden;transition:background .2s}
+.faq-item.open{background:var(--surface2)}
+.faq-btn{width:100%;padding:22px 24px;background:none;border:none;color:var(--text);font-family:var(--font);font-size:16px;font-weight:500;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;letter-spacing:-.02em}
+.faq-btn svg{width:18px;height:18px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;transition:transform .3s,stroke .2s;flex-shrink:0}
+.faq-item.open .faq-btn svg{transform:rotate(45deg);stroke:var(--accent)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.faq-item.open .faq-answer{max-height:200px}
+.faq-answer-inner{padding:0 24px 22px;font-size:15px;color:var(--text2);line-height:1.6;letter-spacing:-.01em}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--divider);padding:60px 24px 40px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--divider)}
+.footer-brand{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.footer-tagline{font-size:13px;color:var(--text3);line-height:1.5;letter-spacing:-.01em;margin-bottom:24px}
+.footer-socials{display:flex;gap:10px}
+.fsoc{width:34px;height:34px;border-radius:9px;background:var(--surface2);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+.fsoc:hover{background:var(--surface3)}
+.fsoc svg{width:16px;height:16px;fill:var(--text2)}
+.footer-col-title{font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text2);letter-spacing:-.01em}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .2s;letter-spacing:-.01em}
+.footer-links a:hover{color:var(--text)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:13px;color:var(--text3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-mobile-btn{display:block}
+  .quick-row{grid-template-columns:1fr}
+  .quick-item{border-right:none;border-bottom:1px solid var(--divider)}
+  .quick-item:last-child{border-bottom:none}
+  .contact-layout{grid-template-columns:1fr}
+  .info-panel{padding:60px 24px;border-right:none;border-bottom:1px solid var(--divider)}
+  .form-panel{padding:60px 24px}
+  .form-row{grid-template-columns:1fr}
+  .budget-row{grid-template-columns:1fr 1fr}
+  .map-inner{grid-template-columns:1fr}
+  .map-info{border-right:none;padding:48px 24px;border-bottom:1px solid var(--divider)}
+  .map-embed{min-height:280px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .form-bottom{flex-direction:column;align-items:stretch}
+  .btn-submit{justify-content:center}
+}
+@media(max-width:430px){
+  .footer-top{grid-template-columns:1fr}
+  .budget-row{grid-template-columns:1fr 1fr}
+  .service-chips{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="services.html" onclick="closeMobile()">Services</a>
+  <a href="projects.html" onclick="closeMobile()">Projects</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Shree Durga Interior</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="tel:+919435754461">+91 94357 54461</a>
+  <button class="nav-mobile-btn" onclick="toggleMobile()"><svg viewBox="0 0 20 20"><line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/></svg></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Contact</span></div>
+  <h1 class="page-title">Let's build something<br>beautiful together.</h1>
+  <p class="page-sub">Tell us about your project and we'll be in touch within 24 hours.</p>
+</div>
+
+<!-- QUICK CONTACT -->
+<div class="quick-row">
+  <a href="tel:+919435754461" class="quick-item reveal">
+    <div class="q-icon" style="background:rgba(41,151,255,.1);color:var(--accent)">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 15.1a19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 4.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 11.9a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 19.73z"/></svg>
+    </div>
+    <div>
+      <div class="q-label">Call directly</div>
+      <div class="q-value">+91 94357 54461</div>
+      <div class="q-sub">Mon–Sat, 9 AM – 6 PM</div>
+    </div>
+  </a>
+  <a href="mailto:shreedurgainterior50@gmail.com" class="quick-item reveal reveal-d1">
+    <div class="q-icon" style="background:rgba(48,209,88,.1);color:var(--accent2)">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </div>
+    <div>
+      <div class="q-label">Email us</div>
+      <div class="q-value" style="font-size:13px;margin-top:2px">shreedurgainterior50@gmail.com</div>
+      <div class="q-sub">Reply within 24 hours</div>
+    </div>
+  </a>
+  <a href="https://wa.me/+919435754461" class="quick-item reveal reveal-d2">
+    <div class="q-icon" style="background:rgba(48,209,88,.1);color:var(--accent2)">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    </div>
+    <div>
+      <div class="q-label">WhatsApp</div>
+      <div class="q-value">Message us</div>
+      <div class="q-sub">Quick responses, any time</div>
+    </div>
+  </a>
+</div>
+
+<!-- MAIN CONTACT -->
+<div class="contact-layout">
+
+  <!-- INFO -->
+  <div class="info-panel reveal">
+    <div class="info-eyebrow">Get in touch</div>
+    <h2 class="info-title">We'd love to hear about your project.</h2>
+    <p class="info-desc">Whether it's a full home renovation or a single room refresh — our team is ready to listen, advise, and create something extraordinary for you.</p>
+
+    <div class="info-items">
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div>
+          <div class="info-item-label">Studio location</div>
+          <div class="info-item-value">Kamalabari Rd, Opposite Bajaj Dealer<br>Duliajan, Assam — India</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div>
+          <div class="info-item-label">Opening hours</div>
+          <div class="info-item-value">
+            <div class="hours-grid">
+              <div class="hours-block"><div class="hours-day">Mon – Sat</div><div class="hours-time">9:00 AM – 6:00 PM</div></div>
+              <div class="hours-block"><div class="hours-day">Sunday</div><div class="hours-time">By appointment</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 15.1a19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 4.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 11.9a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 19.73z"/></svg></div>
+        <div>
+          <div class="info-item-label">Phone & WhatsApp</div>
+          <div class="info-item-value"><a href="tel:+919435754461">+91 94357 54461</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <a href="https://www.facebook.com/shreedurgainterior" class="soc-pill">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        Facebook
+      </a>
+      <a href="https://wa.me/+919435754461" class="soc-pill">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-panel">
+    <div id="formWrap">
+      <div class="form-eyebrow">Send a message</div>
+      <h2 class="form-title">Book your free consultation.</h2>
+
+      <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name *</label>
+            <input class="form-input" id="firstName" type="text" placeholder="Rajesh" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name *</label>
+            <input class="form-input" id="lastName" type="text" placeholder="Sharma" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone number *</label>
+            <input class="form-input" id="phone" type="tel" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input class="form-input" id="email" type="email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">City / Location</label>
+          <input class="form-input" id="city" type="text" placeholder="Duliajan, Assam">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Services you're interested in</label>
+          <div class="service-chips">
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Interior Design</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Modular Kitchen</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Room Interior</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Office Interior</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>False Ceiling</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Custom Furniture</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>3D Visualisation</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>Steel Railing</div>
+            <div class="chip" onclick="toggleChip(this)"><span class="chip-dot"></span>UPVC Windows</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Project type</label>
+          <select id="projectType" class="form-select" onchange="this.classList.add('filled')">
+            <option value="" disabled selected>Select project type</option>
+            <option>Full Home Interior</option>
+            <option>Single Room</option>
+            <option>Modular Kitchen Only</option>
+            <option>Office / Commercial</option>
+            <option>New Construction</option>
+            <option>Renovation / Makeover</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Approximate budget</label>
+          <div class="budget-row">
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">Under<br>₹1 Lakh</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹1–3<br>Lakhs</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹3–10<br>Lakhs</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹10L+</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tell us about your project</label>
+          <textarea id="message" class="form-textarea" placeholder="Describe your space, style preferences, timeline, and any specific requirements…"></textarea>
+        </div>
+
+        <div class="form-bottom">
+          <p class="form-note">We typically respond within 24 hours.<br>Your details are kept completely private.</p>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Send message
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3 class="success-title">Message received!</h3>
+      <p class="success-desc">Thank you for reaching out. Our team will contact you within 24 hours to discuss your project and arrange a free consultation.</p>
+      <a href="tel:+919435754461" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:14px 28px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;letter-spacing:-.02em;transition:all .2s">
+        <svg style="width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 15.1a19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 4.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 11.9a16 16 0 006.29 6.29l.95-.95a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 19.73z"/></svg>
+        Call now: +91 94357 54461
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- MAP -->
+<div class="map-section">
+  <div class="map-inner">
+    <div class="map-info reveal">
+      <h3 class="map-info-title">Visit our studio</h3>
+      <div class="map-detail">
+        <div class="map-detail-icon">📍</div>
+        <div class="map-detail-text"><strong>Studio Address</strong>Kamalabari Rd, Opposite Bajaj Dealer<br>Duliajan, Assam — India</div>
+      </div>
+      <div class="map-detail">
+        <div class="map-detail-icon">🕐</div>
+        <div class="map-detail-text"><strong>Opening Hours</strong>Monday – Saturday: 9:00 AM – 6:00 PM<br>Sunday: By appointment</div>
+      </div>
+      <div class="map-detail">
+        <div class="map-detail-icon">📞</div>
+        <div class="map-detail-text"><strong>Phone</strong><a href="tel:+919435754461" style="color:var(--accent);text-decoration:none">+91 94357 54461</a></div>
+      </div>
+      <a href="https://maps.google.com/?q=Duliajan+Assam" target="_blank" class="map-link">
+        Open in Google Maps <svg viewBox="0 0 16 16"><path d="M10 3h3v3M13 3L7 9M6 5H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-2"/></svg>
+      </a>
+    </div>
+    <div class="map-embed reveal reveal-d1">
+      <div class="map-pin-anim"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="map-place-name">Duliajan, Assam</div>
+      <div class="map-place-sub">Kamalabari Road · Near Bajaj Dealer</div>
+      <a href="https://maps.google.com/?q=Kamalabari+Rd+Duliajan+Assam" target="_blank" class="map-open-btn">
+        View on Google Maps <svg viewBox="0 0 16 16"><path d="M10 3h3v3M13 3L7 9M6 5H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-2"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-eyebrow reveal">Frequently asked</div>
+    <h2 class="faq-title reveal">Common questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-btn" onclick="toggleFAQ(this)">How long does a project typically take? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Timelines vary by scope. A single room typically takes 2–4 weeks. Full home renovations range from 6–16 weeks. We provide a detailed timeline at the start of every project so you always know exactly where things stand.</div></div>
+      </div>
+      <div class="faq-item reveal reveal-d1">
+        <button class="faq-btn" onclick="toggleFAQ(this)">Do you offer free consultations? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes — absolutely. We offer a complimentary first consultation at our studio or at your location. We listen to your vision and share initial ideas. No obligation, no pressure.</div></div>
+      </div>
+      <div class="faq-item reveal reveal-d1">
+        <button class="faq-btn" onclick="toggleFAQ(this)">Can I see a 3D design before work begins? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Absolutely. We produce photorealistic 3D renderings of your space before any physical work begins — so you can visualise the result, request adjustments, and feel 100% confident before we start.</div></div>
+      </div>
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-btn" onclick="toggleFAQ(this)">Do you work outside Duliajan? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. We serve clients across Assam — including Dibrugarh, Guwahati, Jorhat, Tinsukia, and beyond. Get in touch with your location and we'll discuss.</div></div>
+      </div>
+      <div class="faq-item reveal reveal-d2">
+        <button class="faq-btn" onclick="toggleFAQ(this)">What is your payment structure? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><div class="faq-answer-inner">We use a milestone-based payment structure — an initial advance to begin design, then staged payments aligned to project milestones. Full details are provided in your personalised quote. We believe in complete transparency with zero hidden charges.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Shree Durga Interior</div>
+        <p class="footer-tagline">Transforming spaces with passion, precision, and an uncompromising eye for detail. Serving Assam since 1999.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/shreedurgainterior" class="fsoc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://wa.me/+919435754461" class="fsoc"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="services.html">Interior Design</a></li><li><a href="services.html">Modular Kitchen</a></li><li><a href="services.html">Office Interior</a></li><li><a href="services.html">Custom Furniture</a></li></ul></div>
+      <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a href="tel:+919435754461">+91 94357 54461</a></li><li><a href="mailto:shreedurgainterior50@gmail.com">Email us</a></li><li><a href="#">Duliajan, Assam</a></li><li><a href="#">Mon–Sat · 9–6 PM</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Shree Durga Interior. All rights reserved.</span>
+      <span class="footer-copy">Duliajan, Assam · India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+const ro=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function toggleChip(el){el.classList.toggle('selected')}
+function selectBudget(btn){document.querySelectorAll('.budget-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected')}
+
+async function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const originalText = btn.innerHTML;
+  
+  // Data collection
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+  const city = document.getElementById('city').value;
+  const message = document.getElementById('message').value;
+  const projectType = document.getElementById('projectType').value;
+  
+  const services = Array.from(document.querySelectorAll('.chip.selected'))
+    .map(chip => chip.textContent.trim());
+    
+  const budget = document.querySelector('.budget-btn.selected')?.textContent.replace('
+', ' ') || '';
+
+  if (!firstName || !lastName || !phone) {
+    alert('Please fill in all required fields (Name and Phone).');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = 'Sending... <span class="animate-spin inline-block ml-2">⏳</span>';
+
+  try {
+    const response = await fetch('http://localhost:3001/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName, lastName, phone, email, city, services, projectType, budget, message
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+    } else {
+      throw new Error(result.error || 'Submission failed');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Oops! ' + err.message + '. Please try calling us directly at +91 94357 54461.');
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+function toggleFAQ(btn){
+  const item=btn.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+</script>
+</body>
+</html>

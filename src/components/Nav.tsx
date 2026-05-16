@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { X, Menu } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -21,7 +21,7 @@ const Nav = () => {
         </Link>
         <ul className="nav-center">
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/#about">About</Link></li>
+          <li><Link to="/about">About</Link></li>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/projects">Projects</Link></li>
           <li><Link to="/contact">Contact</Link></li>
@@ -35,7 +35,7 @@ const Nav = () => {
           onClick={() => setMobileMenuOpen(true)}
           aria-label="Menu"
         >
-          <span></span><span></span><span></span>
+          <Menu />
         </button>
       </nav>
 
@@ -44,7 +44,7 @@ const Nav = () => {
           <X size={32} />
         </button>
         <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-        <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+        <Link to="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
         <Link to="/services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
         <Link to="/projects" onClick={() => setMobileMenuOpen(false)}>Projects</Link>
         <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>

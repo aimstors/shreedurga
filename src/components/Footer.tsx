@@ -1,5 +1,5 @@
 import { Facebook, MessageCircle } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 
 const Footer = () => {
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
           <div>
             <div className="footer-col-title">Studio</div>
             <ul className="footer-links">
-              <li><Link to="/#about">Our Story</Link></li>
+              <li><Link to="/about">Our Story</Link></li>
               <li><Link to="/projects">Recent Projects</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
             </ul>

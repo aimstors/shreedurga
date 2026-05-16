@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+*/node_modules/
+.npm
+
+# Environment — NEVER commit these
+.env
+.env.local
+.env.production
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+pm2-logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Vercel
+.vercel/
+
+# AWS
+.aws/
+*.pem
+*.key
+
+# Misc
+*.bak
+*.tmp
+coverage/

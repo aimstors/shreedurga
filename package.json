@@ -1,39 +1,28 @@
 {
-  "name": "shreedurga-interior",
-  "version": "1.0.0",
-  "description": "Shree Durga Interior — Full Stack Website",
+  "name": "shreedurga-interior-ts",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "npx serve frontend -p 3000 -s",
-    "install:all": "npm install && cd backend && npm install",
-    "start": "cd backend && npm start",
-    "deploy:vercel": "vercel --prod",
-    "deploy:vps": "ssh $VPS_USER@$VPS_HOST 'cd /var/www/shreedurga-interior && git pull && cd backend && npm install --production && pm2 reload shreedurga-api'",
-    "build": "echo 'Static site — no build step needed'",
-    "lint": "echo 'Add eslint config for linting'"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.344.0"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "serve": "^14.2.1",
-    "vercel": "^32.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/shreedurga-interior.git"
-  },
-  "keywords": [
-    "interior-design",
-    "assam",
-    "duliajan",
-    "fullstack",
-    "express",
-    "supabase"
-  ],
-  "license": "UNLICENSED"
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  }
 }

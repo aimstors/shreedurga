@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { getSupabaseAdmin } from '@/integrations/supabase/client.server'
 
 export const submitContactForm = createServerFn({ method: 'POST' })
-  .validator((data: any) => data)
+  .inputValidator((data: any) => data)
   .handler(async ({ data }) => {
     const supabase = getSupabaseAdmin()
     

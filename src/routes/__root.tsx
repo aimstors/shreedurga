@@ -1,6 +1,4 @@
-import { createRootRoute } from '@tanstack/react-router'
-import { Outlet, ScrollRestoration } from '@tanstack/react-router'
-import { HeadContent, Scripts } from '@tanstack/react-start'
+import { createRootRoute, Outlet, HeadContent, Scripts } from '@tanstack/react-router'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import styles from '../styles.css?url'

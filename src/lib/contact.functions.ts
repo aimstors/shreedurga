@@ -7,7 +7,7 @@ export const submitContactForm = createServerFn({ method: 'POST' })
     const supabase = getSupabaseAdmin()
     
     // Log the submission to Supabase or send an email
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('contact_submissions')
       .insert([data])
 

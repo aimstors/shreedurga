@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
-import { useState, useRef, useEffect } from 'react'
+
 
 export const Route = createFileRoute('/projects')({
   head: () => ({

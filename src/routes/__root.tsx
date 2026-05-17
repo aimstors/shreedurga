@@ -34,7 +34,7 @@ function RootComponent() {
           </main>
           <Footer />
         </div>
-        <ScrollRestoration />
+        
         <Scripts />
       </body>
     </html>

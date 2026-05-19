@@ -135,6 +135,7 @@ function StatCounter({ target, suffix = '', label, delay = 0 }: any) {
 }
 
 function HomePage() {
+  const featured = allServices.slice(0, 8)
   return (
     <div className="page-home">
       <Hero />
@@ -143,10 +144,75 @@ function HomePage() {
           <StatCounter target={25} label="Years of excellence" />
           <StatCounter target={850} suffix="+" label="Projects completed" delay={0.1} />
           <StatCounter target={98} suffix="%" label="Client satisfaction" delay={0.2} />
-          <StatCounter target={12} label="Design awards won" delay={0.3} />
+          <StatCounter target={12} label="Districts served" delay={0.3} />
         </div>
       </div>
-      {/* ... Other sections would go here ... */}
+
+      <section style={{ background: '#000', color: '#fff', padding: '80px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexWrap: 'wrap', gap: 16, marginBottom: 32 }}>
+            <div>
+              <div className="section-eyebrow">What we do</div>
+              <h2 style={{ fontSize: 40, fontWeight: 600, letterSpacing: '-0.02em', margin: '8px 0 0' }}>
+                Complete interior solutions.
+              </h2>
+            </div>
+            <Link to="/services" className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              View all services <ArrowRight size={16} />
+            </Link>
+          </div>
+          <div style={{ display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}>
+            {featured.map((s, i) => {
+              const Icon = s.icon
+              return (
+                <motion.div
+                  key={s.slug}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                  className="s-bento-card"
+                >
+                  <div className="s-icon"><Icon size={22} /></div>
+                  <div className="s-title">{s.title}</div>
+                  <div className="s-desc">{s.desc}</div>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ background: '#0a0a0a', color: '#fff', padding: '80px 24px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', textAlign: 'center' }}>
+          <div className="section-eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <MapPin size={14} /> Where we work
+          </div>
+          <h2 style={{ fontSize: 40, fontWeight: 600, letterSpacing: '-0.02em', margin: '12px 0 8px' }}>
+            Serving 12 districts. Within 200 km.
+          </h2>
+          <p style={{ opacity: 0.7, maxWidth: 640, margin: '0 auto 28px' }}>{serviceAreaIntro}</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginBottom: 32 }}>
+            {serviceAreas.map((d) => (
+              <span
+                key={d.name}
+                style={{
+                  border: '1px solid rgba(255,255,255,0.18)',
+                  borderRadius: 999,
+                  padding: '8px 14px',
+                  fontSize: 14,
+                  background: 'rgba(255,255,255,0.04)',
+                }}
+              >
+                {d.name}
+              </span>
+            ))}
+          </div>
+          <Link to="/contact" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            Book free consultation <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

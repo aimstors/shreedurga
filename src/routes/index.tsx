@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
-import { 
-  Check, ArrowRight
-} from 'lucide-react'
+import { Check, ArrowRight, MapPin } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+import { allServices } from '@/lib/services'
+import { serviceAreas, serviceAreaIntro } from '@/lib/service-areas'
 
 export const Route = createFileRoute('/')({
   head: () => ({

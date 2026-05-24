@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { serviceCategories } from '@/lib/services'
 
@@ -33,7 +32,7 @@ function findCat(id: string) {
   return serviceCategories.find((c) => c.id === id)!
 }
 
-function CategoryEyebrow({ num, label }: { num: string; label: string }) {
+function Eyebrow({ num, label }: { num: string; label: string }) {
   return (
     <span className="uppercase tracking-widest text-xs mb-4 block opacity-60" style={sans}>
       {num} / {label}
@@ -45,15 +44,14 @@ function ServicesPage() {
   const interiors = findCat('interiors')
   const design = findCat('design')
   const ceiling = findCat('ceiling-walls')
-  const kitchen = findCat('interiors').services.filter((s) =>
+  const kitchen = interiors.services.filter((s) =>
     ['modular-kitchen', 'wardrobe', 'tv-unit', 'bed-bedroom'].includes(s.slug),
   )
   const windows = findCat('windows-glass')
   const metal = findCat('metal-exterior')
   const flooring = findCat('flooring')
 
-  const tile =
-    'p-8 flex flex-col justify-between transition-all duration-500'
+  const tileBase = 'p-8 flex flex-col justify-between transition-all duration-500 animate-fade-in'
 
   return (
     <div
@@ -68,41 +66,30 @@ function ServicesPage() {
           <span className="mx-2 opacity-40">/</span>
           <span>Services</span>
         </div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-6xl md:text-8xl mb-8 tracking-tight leading-none"
+        <h1
+          className="text-6xl md:text-8xl mb-8 tracking-tight leading-none animate-fade-in"
           style={{ ...serif, color: PALETTE.deep }}
         >
           Our Services
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="max-w-2xl text-xl md:text-2xl font-light leading-relaxed opacity-90"
-        >
+        </h1>
+        <p className="max-w-2xl text-xl md:text-2xl font-light leading-relaxed opacity-90 animate-fade-in">
           From the tea estates of Tinsukia to the hills of Arunachal, we craft
           premium spaces that balance structural integrity with high-end
           aesthetic precision.
-        </motion.p>
+        </p>
       </div>
 
       {/* Bento Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
 
         {/* 01 Interiors — featured */}
-        <motion.div
+        <div
           id="interiors"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-2 lg:col-span-3 row-span-2 group cursor-pointer hover:bg-[${PALETTE.deep}] hover:text-[${PALETTE.bg}] ${tile}`}
+          className={`md:col-span-2 lg:col-span-3 row-span-2 group cursor-pointer ${tileBase}`}
           style={{ background: PALETTE.surface }}
         >
           <div>
-            <CategoryEyebrow num="01" label="Interiors" />
+            <Eyebrow num="01" label="Interiors" />
             <h3 className="text-4xl mb-4 leading-tight" style={{ ...serif, color: PALETTE.deep }}>
               Residential & Commercial Design
             </h3>
@@ -113,24 +100,21 @@ function ServicesPage() {
             ))}
             <p>Retail & Hospitality Fit-outs</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* 02 Ceiling */}
-        <motion.div
+        <div
           id="ceiling-walls"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-2 lg:col-span-2 hover:bg-[${PALETTE.ink}] hover:text-white ${tile}`}
+          className={`md:col-span-2 lg:col-span-2 ${tileBase}`}
           style={{ background: PALETTE.surface }}
         >
-          <CategoryEyebrow num="02" label="Ceiling & Walls" />
+          <Eyebrow num="02" label="Ceiling & Walls" />
           <div className="space-y-1">
             {ceiling.services.map((s) => (
-              <p key={s.slug} className="text-xl" style={serif}>{s.title}</p>
+              <p key={s.slug} className="text-xl" style={{ ...serif, color: PALETTE.deep }}>{s.title}</p>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Decorative deep tile */}
         <div
@@ -141,14 +125,11 @@ function ServicesPage() {
         </div>
 
         {/* 03 Kitchen & Storage */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-2 lg:col-span-3 hover:ring-1 hover:ring-[${PALETTE.deep}] ${tile}`}
+        <div
+          className={`md:col-span-2 lg:col-span-3 ${tileBase}`}
           style={{ background: PALETTE.surface }}
         >
-          <CategoryEyebrow num="03" label="Kitchen & Storage" />
+          <Eyebrow num="03" label="Kitchen & Storage" />
           <div className="grid grid-cols-2 gap-4">
             <h3 className="text-2xl leading-tight" style={{ ...serif, color: PALETTE.deep }}>
               Modular Kitchens
@@ -157,22 +138,19 @@ function ServicesPage() {
               {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k) => k.title).join(' · ')}
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* 04 Windows */}
-        <motion.div
+        <div
           id="windows-glass"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-2 lg:col-span-2 row-span-2 ${tile}`}
+          className={`md:col-span-2 lg:col-span-2 row-span-2 ${tileBase}`}
           style={{
             background: PALETTE.surface,
             borderLeft: `1px solid ${PALETTE.border}`,
             borderTop: `1px solid ${PALETTE.border}`,
           }}
         >
-          <CategoryEyebrow num="04" label="Windows & Glass" />
+          <Eyebrow num="04" label="Windows & Glass" />
           <div className="space-y-6">
             {windows.services.map((s) => (
               <div key={s.slug}>
@@ -181,59 +159,50 @@ function ServicesPage() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* 05 Metalwork */}
-        <motion.div
+        <div
           id="metal-exterior"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-1 ${tile}`}
+          className={`md:col-span-1 ${tileBase}`}
           style={{ background: PALETTE.ink, color: PALETTE.bg }}
         >
           <span className="uppercase tracking-widest text-[10px] mb-2 block opacity-50">05 / Metal</span>
           <p className="text-lg leading-tight" style={serif}>
             {metal.services.map((s) => s.title).join(' & ')}
           </p>
-        </motion.div>
+        </div>
 
         {/* 06 Flooring */}
-        <motion.div
+        <div
           id="flooring"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-3 lg:col-span-1 flex flex-col justify-center p-8`}
+          className="md:col-span-3 lg:col-span-1 flex flex-col justify-center p-8 animate-fade-in"
           style={{
             background: PALETTE.surface,
             borderBottom: `1px solid ${PALETTE.border}`,
             borderRight: `1px solid ${PALETTE.border}`,
           }}
         >
-          <CategoryEyebrow num="06" label="Flooring" />
+          <Eyebrow num="06" label="Flooring" />
           {flooring.services.map((s) => (
             <p key={s.slug} className="text-base opacity-80">{s.title}</p>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Design & Drawing + extras */}
-        <motion.div
+        {/* 07 Design & Drawing */}
+        <div
           id="design"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`md:col-span-2 lg:col-span-2 hover:bg-[${PALETTE.deep}] hover:text-white group ${tile}`}
+          className={`md:col-span-2 lg:col-span-2 ${tileBase}`}
           style={{ background: PALETTE.surface }}
         >
-          <CategoryEyebrow num="07" label="Design & Drawing" />
-          <ul className="space-y-2 text-lg italic" style={serif}>
+          <Eyebrow num="07" label="Design & Drawing" />
+          <ul className="space-y-2 text-lg italic" style={{ ...serif, color: PALETTE.deep }}>
             {design.services.map((s) => (
               <li key={s.slug}>{s.title}</li>
             ))}
             <li>Custom Wallpaper Styling</li>
           </ul>
-        </motion.div>
+        </div>
       </div>
 
       {/* CTA */}

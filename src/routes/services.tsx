@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
 import { serviceCategories } from '@/lib/services'
 
-const PALETTE = {
+const C = {
   bg: '#f5f3ee',
   surface: '#e8e4dd',
   ink: '#2d2d2d',
@@ -10,8 +10,8 @@ const PALETTE = {
   border: '#dcd8cf',
 }
 
-const serif = { fontFamily: "'DM Serif Display', serif" }
-const sans = { fontFamily: "'Fira Sans', sans-serif" }
+const serif: React.CSSProperties = { fontFamily: "'DM Serif Display', serif" }
+const sans: React.CSSProperties = { fontFamily: "'Fira Sans', sans-serif" }
 
 export const Route = createFileRoute('/services')({
   head: () => ({
@@ -28,16 +28,31 @@ export const Route = createFileRoute('/services')({
   component: ServicesPage,
 })
 
-function findCat(id: string) {
-  return serviceCategories.find((c) => c.id === id)!
+const tile: React.CSSProperties = {
+  background: C.surface,
+  padding: 32,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  gap: 24,
+  minHeight: 220,
+  transition: 'transform 0.4s cubic-bezier(.2,.7,.2,1), background 0.4s',
 }
 
-function Eyebrow({ num, label }: { num: string; label: string }) {
-  return (
-    <span className="uppercase tracking-widest text-xs mb-4 block opacity-60" style={sans}>
-      {num} / {label}
-    </span>
-  )
+const eyebrow: React.CSSProperties = {
+  textTransform: 'uppercase',
+  letterSpacing: '0.18em',
+  fontSize: 11,
+  opacity: 0.6,
+  display: 'block',
+}
+
+function Eye({ n, label }: { n: string; label: string }) {
+  return <span style={{ ...eyebrow, ...sans }}>{n} / {label}</span>
+}
+
+function findCat(id: string) {
+  return serviceCategories.find((c) => c.id === id)!
 }
 
 function ServicesPage() {
@@ -51,184 +66,225 @@ function ServicesPage() {
   const metal = findCat('metal-exterior')
   const flooring = findCat('flooring')
 
-  const tileBase = 'p-8 flex flex-col justify-between transition-all duration-500 animate-fade-in'
-
   return (
     <div
       id="services-top"
-      className="w-full py-20 px-6 md:px-12 lg:px-24"
-      style={{ background: PALETTE.bg, color: PALETTE.ink, ...sans }}
+      style={{
+        background: C.bg,
+        color: C.ink,
+        padding: '96px 24px 96px',
+        ...sans,
+      }}
     >
+      <style>{`
+        .sd-bento { display: grid; gap: 16px; grid-template-columns: 1fr; }
+        @media (min-width: 720px) { .sd-bento { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1024px) { .sd-bento { grid-template-columns: repeat(6, 1fr); } }
+        .sd-tile-hover:hover { background: ${C.deep} !important; color: ${C.bg} !important; transform: translateY(-2px); }
+        .sd-cta:hover { transform: translateY(-2px); }
+        .sd-cta:hover svg { transform: translateX(6px); }
+        .sd-link-back { color: ${C.ink}; text-decoration: none; }
+        .sd-link-back:hover { color: ${C.deep}; text-decoration: underline; }
+      `}</style>
+
       {/* Hero */}
-      <div className="max-w-7xl mx-auto mb-16">
-        <div className="text-xs uppercase tracking-[0.2em] mb-6 opacity-60">
-          <Link to="/" style={{ color: PALETTE.ink }}>Home</Link>
-          <span className="mx-2 opacity-40">/</span>
+      <div style={{ maxWidth: 1280, margin: '0 auto', marginBottom: 72 }}>
+        <div style={{ ...eyebrow, marginBottom: 24 }}>
+          <Link to="/" className="sd-link-back">Home</Link>
+          <span style={{ margin: '0 10px', opacity: 0.4 }}>/</span>
           <span>Services</span>
         </div>
         <h1
-          className="text-6xl md:text-8xl mb-8 tracking-tight leading-none animate-fade-in"
-          style={{ ...serif, color: PALETTE.deep }}
+          style={{
+            ...serif,
+            color: C.deep,
+            fontSize: 'clamp(48px, 8vw, 112px)',
+            lineHeight: 0.95,
+            letterSpacing: '-0.02em',
+            margin: '0 0 28px',
+          }}
         >
           Our Services
         </h1>
-        <p className="max-w-2xl text-xl md:text-2xl font-light leading-relaxed opacity-90 animate-fade-in">
-          From the tea estates of Tinsukia to the hills of Arunachal, we craft
-          premium spaces that balance structural integrity with high-end
-          aesthetic precision.
+        <p
+          style={{
+            maxWidth: 640,
+            fontSize: 'clamp(17px, 1.6vw, 22px)',
+            fontWeight: 300,
+            lineHeight: 1.55,
+            opacity: 0.9,
+            margin: 0,
+          }}
+        >
+          From the tea estates of Tinsukia to the hills of Arunachal Pradesh,
+          we craft premium spaces that balance structural integrity with
+          high-end aesthetic precision.
         </p>
       </div>
 
-      {/* Bento Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
-
-        {/* 01 Interiors — featured */}
-        <div
-          id="interiors"
-          className={`md:col-span-2 lg:col-span-3 row-span-2 group cursor-pointer ${tileBase}`}
-          style={{ background: PALETTE.surface }}
-        >
-          <div>
-            <Eyebrow num="01" label="Interiors" />
-            <h3 className="text-4xl mb-4 leading-tight" style={{ ...serif, color: PALETTE.deep }}>
-              Residential & Commercial Design
-            </h3>
+      {/* Bento */}
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="sd-bento">
+          {/* 01 Interiors — featured */}
+          <div
+            id="interiors"
+            className="sd-tile-hover"
+            style={{ ...tile, gridColumn: 'span 3 / span 3', gridRow: 'span 2 / span 2', minHeight: 460 }}
+          >
+            <div>
+              <Eye n="01" label="Interiors" />
+              <h3 style={{ ...serif, color: C.deep, fontSize: 40, lineHeight: 1.05, margin: '16px 0 0' }}>
+                Residential & Commercial Design
+              </h3>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, opacity: 0.85, fontSize: 16 }}>
+              {interiors.services.slice(0, 2).map((s) => <p key={s.slug} style={{ margin: 0 }}>{s.title}</p>)}
+              <p style={{ margin: 0 }}>Retail & Hospitality Fit-outs</p>
+            </div>
           </div>
-          <div className="space-y-2 opacity-80 text-base">
-            {interiors.services.slice(0, 2).map((s) => (
-              <p key={s.slug}>{s.title}</p>
-            ))}
-            <p>Retail & Hospitality Fit-outs</p>
+
+          {/* 02 Ceiling */}
+          <div id="ceiling-walls" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
+            <Eye n="02" label="Ceiling & Walls" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {ceiling.services.map((s) => (
+                <p key={s.slug} style={{ ...serif, color: C.deep, fontSize: 20, margin: 0, lineHeight: 1.25 }}>{s.title}</p>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* 02 Ceiling */}
-        <div
-          id="ceiling-walls"
-          className={`md:col-span-2 lg:col-span-2 ${tileBase}`}
-          style={{ background: PALETTE.surface }}
-        >
-          <Eyebrow num="02" label="Ceiling & Walls" />
-          <div className="space-y-1">
-            {ceiling.services.map((s) => (
-              <p key={s.slug} className="text-xl" style={{ ...serif, color: PALETTE.deep }}>{s.title}</p>
-            ))}
+          {/* Decorative deep tile */}
+          <div
+            style={{
+              background: C.deep,
+              padding: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gridColumn: 'span 1 / span 1',
+            }}
+          >
+            <div style={{ width: 1, height: '100%', background: C.bg, opacity: 0.2 }} />
           </div>
-        </div>
 
-        {/* Decorative deep tile */}
-        <div
-          className="hidden lg:flex items-center justify-center p-8"
-          style={{ background: PALETTE.deep }}
-        >
-          <div className="w-px h-full opacity-20" style={{ background: PALETTE.bg }} />
-        </div>
+          {/* 03 Kitchen & Storage */}
+          <div className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 3 / span 3' }}>
+            <Eye n="03" label="Kitchen & Storage" />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <h3 style={{ ...serif, color: C.deep, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
+                Modular Kitchens
+              </h3>
+              <p style={{ fontSize: 13, opacity: 0.8, alignSelf: 'end', margin: 0 }}>
+                {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k) => k.title).join(' · ')}
+              </p>
+            </div>
+          </div>
 
-        {/* 03 Kitchen & Storage */}
-        <div
-          className={`md:col-span-2 lg:col-span-3 ${tileBase}`}
-          style={{ background: PALETTE.surface }}
-        >
-          <Eyebrow num="03" label="Kitchen & Storage" />
-          <div className="grid grid-cols-2 gap-4">
-            <h3 className="text-2xl leading-tight" style={{ ...serif, color: PALETTE.deep }}>
-              Modular Kitchens
-            </h3>
-            <p className="text-sm self-end opacity-80">
-              {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k) => k.title).join(' · ')}
+          {/* 04 Windows */}
+          <div
+            id="windows-glass"
+            style={{
+              ...tile,
+              gridColumn: 'span 2 / span 2',
+              gridRow: 'span 2 / span 2',
+              borderLeft: `1px solid ${C.border}`,
+              borderTop: `1px solid ${C.border}`,
+              minHeight: 460,
+            }}
+          >
+            <Eye n="04" label="Windows & Glass" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              {windows.services.map((s) => (
+                <div key={s.slug}>
+                  <p style={{ ...serif, color: C.deep, fontSize: 22, margin: '0 0 4px' }}>{s.title}</p>
+                  <p style={{ fontSize: 13, opacity: 0.7, margin: 0 }}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 05 Metalwork */}
+          <div
+            id="metal-exterior"
+            style={{ ...tile, background: C.ink, color: C.bg, gridColumn: 'span 1 / span 1', minHeight: 180 }}
+          >
+            <span style={{ ...eyebrow, opacity: 0.5, fontSize: 10 }}>05 / Metal</span>
+            <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2 }}>
+              {metal.services.map((s) => s.title).join(' & ')}
             </p>
           </div>
-        </div>
 
-        {/* 04 Windows */}
-        <div
-          id="windows-glass"
-          className={`md:col-span-2 lg:col-span-2 row-span-2 ${tileBase}`}
-          style={{
-            background: PALETTE.surface,
-            borderLeft: `1px solid ${PALETTE.border}`,
-            borderTop: `1px solid ${PALETTE.border}`,
-          }}
-        >
-          <Eyebrow num="04" label="Windows & Glass" />
-          <div className="space-y-6">
-            {windows.services.map((s) => (
-              <div key={s.slug}>
-                <p className="text-2xl mb-1" style={{ ...serif, color: PALETTE.deep }}>{s.title}</p>
-                <p className="text-sm opacity-70">{s.desc}</p>
-              </div>
+          {/* 06 Flooring */}
+          <div
+            id="flooring"
+            style={{
+              ...tile,
+              gridColumn: 'span 1 / span 1',
+              justifyContent: 'center',
+              gap: 6,
+              borderBottom: `1px solid ${C.border}`,
+              borderRight: `1px solid ${C.border}`,
+              minHeight: 180,
+            }}
+          >
+            <Eye n="06" label="Floor" />
+            {flooring.services.map((s) => (
+              <p key={s.slug} style={{ margin: 0, fontSize: 14, opacity: 0.85 }}>{s.title}</p>
             ))}
           </div>
-        </div>
 
-        {/* 05 Metalwork */}
-        <div
-          id="metal-exterior"
-          className={`md:col-span-1 ${tileBase}`}
-          style={{ background: PALETTE.ink, color: PALETTE.bg }}
-        >
-          <span className="uppercase tracking-widest text-[10px] mb-2 block opacity-50">05 / Metal</span>
-          <p className="text-lg leading-tight" style={serif}>
-            {metal.services.map((s) => s.title).join(' & ')}
-          </p>
-        </div>
-
-        {/* 06 Flooring */}
-        <div
-          id="flooring"
-          className="md:col-span-3 lg:col-span-1 flex flex-col justify-center p-8 animate-fade-in"
-          style={{
-            background: PALETTE.surface,
-            borderBottom: `1px solid ${PALETTE.border}`,
-            borderRight: `1px solid ${PALETTE.border}`,
-          }}
-        >
-          <Eyebrow num="06" label="Flooring" />
-          {flooring.services.map((s) => (
-            <p key={s.slug} className="text-base opacity-80">{s.title}</p>
-          ))}
-        </div>
-
-        {/* 07 Design & Drawing */}
-        <div
-          id="design"
-          className={`md:col-span-2 lg:col-span-2 ${tileBase}`}
-          style={{ background: PALETTE.surface }}
-        >
-          <Eyebrow num="07" label="Design & Drawing" />
-          <ul className="space-y-2 text-lg italic" style={{ ...serif, color: PALETTE.deep }}>
-            {design.services.map((s) => (
-              <li key={s.slug}>{s.title}</li>
-            ))}
-            <li>Custom Wallpaper Styling</li>
-          </ul>
+          {/* 07 Design & Drawing */}
+          <div id="design" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
+            <Eye n="07" label="Design & Drawing" />
+            <ul style={{ ...serif, color: C.deep, fontStyle: 'italic', listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, fontSize: 18 }}>
+              {design.services.map((s) => <li key={s.slug}>{s.title}</li>)}
+              <li>Custom Wallpaper Styling</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       {/* CTA */}
       <div
-        className="max-w-7xl mx-auto mt-24 pt-20 flex flex-col md:flex-row items-baseline justify-between"
-        style={{ borderTop: `1px solid ${PALETTE.ink}1a` }}
+        style={{
+          maxWidth: 1280,
+          margin: '96px auto 0',
+          paddingTop: 80,
+          borderTop: `1px solid ${C.ink}1a`,
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 32,
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+        }}
       >
-        <div className="max-w-xl mb-12 md:mb-0">
-          <h2
-            className="text-4xl md:text-5xl leading-none mb-6"
-            style={{ ...serif, color: PALETTE.deep }}
-          >
+        <div style={{ maxWidth: 560 }}>
+          <h2 style={{ ...serif, color: C.deep, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1.05, margin: '0 0 16px' }}>
             Start your transformation.
           </h2>
-          <p className="text-lg opacity-80">
+          <p style={{ fontSize: 17, opacity: 0.8, margin: 0 }}>
             Serving Tinsukia, Dibrugarh, Pasighat and 9 more districts within 200 km.
           </p>
         </div>
-        <Link to="/contact" className="inline-flex items-center group">
-          <span
-            className="px-10 py-5 text-lg font-medium tracking-wide flex items-center transition-transform group-hover:-translate-y-1"
-            style={{ background: PALETTE.deep, color: PALETTE.bg }}
-          >
-            Book a Consultation
-            <ArrowRight className="ml-4 w-5 h-5 transition-transform group-hover:translate-x-2" />
-          </span>
+        <Link
+          to="/contact"
+          className="sd-cta"
+          style={{
+            background: C.deep,
+            color: C.bg,
+            padding: '20px 40px',
+            fontSize: 16,
+            fontWeight: 500,
+            letterSpacing: '0.02em',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 16,
+            textDecoration: 'none',
+            transition: 'transform 0.25s',
+          }}
+        >
+          Book a Consultation
+          <ArrowRight size={18} style={{ transition: 'transform 0.25s' }} />
         </Link>
       </div>
     </div>

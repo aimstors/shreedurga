@@ -98,6 +98,8 @@ function ServicesPage() {
         .sd-cta:hover svg { transform: translateX(6px); }
         .sd-link-back { color: ${C.ink}; text-decoration: none; }
         .sd-link-back:hover { color: ${C.deep}; text-decoration: underline; }
+        .sd-svc-link { transition: opacity 0.2s; }
+        .sd-svc-link:hover { opacity: 0.6; text-decoration: underline; }
       `}</style>
 
       {/* Hero */}

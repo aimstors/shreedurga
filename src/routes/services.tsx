@@ -190,11 +190,17 @@ function ServicesPage() {
           <div className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 3 / span 3' }}>
             <Eye n="03" label="Kitchen & Storage" />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              <h3 style={{ ...serif, color: C.deep, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
-                Modular Kitchens
-              </h3>
-              <p style={{ fontSize: 13, opacity: 0.8, alignSelf: 'end', margin: 0 }}>
-                {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k) => k.title).join(' · ')}
+              <SLink s={kitchen.find((k) => k.slug === 'modular-kitchen')!}>
+                <h3 style={{ ...serif, color: C.deep, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
+                  Modular Kitchens
+                </h3>
+              </SLink>
+              <p style={{ fontSize: 13, opacity: 0.8, alignSelf: 'end', margin: 0, display: 'flex', flexWrap: 'wrap', gap: '4px 8px' }}>
+                {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k, i) => (
+                  <span key={k.slug}>
+                    <SLink s={k}>{k.title}</SLink>{i < kitchen.length - 2 ? ' ·' : ''}
+                  </span>
+                ))}
               </p>
             </div>
           </div>

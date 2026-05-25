@@ -153,7 +153,9 @@ function ServicesPage() {
               </h3>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, opacity: 0.85, fontSize: 16 }}>
-              {interiors.services.slice(0, 2).map((s) => <p key={s.slug} style={{ margin: 0 }}>{s.title}</p>)}
+              {interiors.services.slice(0, 2).map((s) => (
+                <SLink key={s.slug} s={s}><p style={{ margin: 0 }}>{s.title}</p></SLink>
+              ))}
               <p style={{ margin: 0 }}>Retail & Hospitality Fit-outs</p>
             </div>
           </div>

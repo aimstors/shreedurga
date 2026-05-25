@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
-import { serviceCategories } from '@/lib/services'
+import { serviceCategories, type Service } from '@/lib/services'
 
 const C = {
   bg: '#f5f3ee',
@@ -51,6 +51,19 @@ function Eye({ n, label }: { n: string; label: string }) {
   return <span style={{ ...eyebrow, ...sans }}>{n} / {label}</span>
 }
 
+function SLink({ s, children, style }: { s: Service; children: React.ReactNode; style?: React.CSSProperties }) {
+  return (
+    <Link
+      to="/services/$slug"
+      params={{ slug: s.slug }}
+      className="sd-svc-link"
+      style={{ color: 'inherit', textDecoration: 'none', ...style }}
+    >
+      {children}
+    </Link>
+  )
+}
+
 function findCat(id: string) {
   return serviceCategories.find((c) => c.id === id)!
 }
@@ -85,6 +98,8 @@ function ServicesPage() {
         .sd-cta:hover svg { transform: translateX(6px); }
         .sd-link-back { color: ${C.ink}; text-decoration: none; }
         .sd-link-back:hover { color: ${C.deep}; text-decoration: underline; }
+        .sd-svc-link { transition: opacity 0.2s; }
+        .sd-svc-link:hover { opacity: 0.6; text-decoration: underline; }
       `}</style>
 
       {/* Hero */}
@@ -138,7 +153,9 @@ function ServicesPage() {
               </h3>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, opacity: 0.85, fontSize: 16 }}>
-              {interiors.services.slice(0, 2).map((s) => <p key={s.slug} style={{ margin: 0 }}>{s.title}</p>)}
+              {interiors.services.slice(0, 2).map((s) => (
+                <SLink key={s.slug} s={s}><p style={{ margin: 0 }}>{s.title}</p></SLink>
+              ))}
               <p style={{ margin: 0 }}>Retail & Hospitality Fit-outs</p>
             </div>
           </div>
@@ -148,7 +165,9 @@ function ServicesPage() {
             <Eye n="02" label="Ceiling & Walls" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {ceiling.services.map((s) => (
-                <p key={s.slug} style={{ ...serif, color: C.deep, fontSize: 20, margin: 0, lineHeight: 1.25 }}>{s.title}</p>
+                <SLink key={s.slug} s={s}>
+                  <p style={{ ...serif, color: C.deep, fontSize: 20, margin: 0, lineHeight: 1.25 }}>{s.title}</p>
+                </SLink>
               ))}
             </div>
           </div>
@@ -171,11 +190,17 @@ function ServicesPage() {
           <div className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 3 / span 3' }}>
             <Eye n="03" label="Kitchen & Storage" />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              <h3 style={{ ...serif, color: C.deep, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
-                Modular Kitchens
-              </h3>
-              <p style={{ fontSize: 13, opacity: 0.8, alignSelf: 'end', margin: 0 }}>
-                {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k) => k.title).join(' · ')}
+              <SLink s={kitchen.find((k) => k.slug === 'modular-kitchen')!}>
+                <h3 style={{ ...serif, color: C.deep, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
+                  Modular Kitchens
+                </h3>
+              </SLink>
+              <p style={{ fontSize: 13, opacity: 0.8, alignSelf: 'end', margin: 0, display: 'flex', flexWrap: 'wrap', gap: '4px 8px' }}>
+                {kitchen.filter((k) => k.slug !== 'modular-kitchen').map((k, i) => (
+                  <span key={k.slug}>
+                    <SLink s={k}>{k.title}</SLink>{i < kitchen.length - 2 ? ' ·' : ''}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
@@ -195,10 +220,12 @@ function ServicesPage() {
             <Eye n="04" label="Windows & Glass" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               {windows.services.map((s) => (
-                <div key={s.slug}>
-                  <p style={{ ...serif, color: C.deep, fontSize: 22, margin: '0 0 4px' }}>{s.title}</p>
-                  <p style={{ fontSize: 13, opacity: 0.7, margin: 0 }}>{s.desc}</p>
-                </div>
+                <SLink key={s.slug} s={s}>
+                  <div>
+                    <p style={{ ...serif, color: C.deep, fontSize: 22, margin: '0 0 4px' }}>{s.title}</p>
+                    <p style={{ fontSize: 13, opacity: 0.7, margin: 0 }}>{s.desc}</p>
+                  </div>
+                </SLink>
               ))}
             </div>
           </div>
@@ -209,8 +236,12 @@ function ServicesPage() {
             style={{ ...tile, background: C.ink, color: C.bg, gridColumn: 'span 1 / span 1', minHeight: 180 }}
           >
             <span style={{ ...eyebrow, opacity: 0.5, fontSize: 10 }}>05 / Metal</span>
-            <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2 }}>
-              {metal.services.map((s) => s.title).join(' & ')}
+            <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {metal.services.map((s, i) => (
+                <span key={s.slug}>
+                  <SLink s={s}>{s.title}</SLink>{i < metal.services.length - 1 ? ' &' : ''}
+                </span>
+              ))}
             </p>
           </div>
 
@@ -229,7 +260,9 @@ function ServicesPage() {
           >
             <Eye n="06" label="Floor" />
             {flooring.services.map((s) => (
-              <p key={s.slug} style={{ margin: 0, fontSize: 14, opacity: 0.85 }}>{s.title}</p>
+              <SLink key={s.slug} s={s}>
+                <p style={{ margin: 0, fontSize: 14, opacity: 0.85 }}>{s.title}</p>
+              </SLink>
             ))}
           </div>
 
@@ -237,8 +270,10 @@ function ServicesPage() {
           <div id="design" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
             <Eye n="07" label="Design & Drawing" />
             <ul style={{ ...serif, color: C.deep, fontStyle: 'italic', listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, fontSize: 18 }}>
-              {design.services.map((s) => <li key={s.slug}>{s.title}</li>)}
-              <li>Custom Wallpaper Styling</li>
+              {design.services.map((s) => (
+                <li key={s.slug}><SLink s={s}>{s.title}</SLink></li>
+              ))}
+              <li style={{ opacity: 0.7 }}>Custom Wallpaper Styling</li>
             </ul>
           </div>
         </div>

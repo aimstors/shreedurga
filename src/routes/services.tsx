@@ -260,7 +260,9 @@ function ServicesPage() {
           >
             <Eye n="06" label="Floor" />
             {flooring.services.map((s) => (
-              <p key={s.slug} style={{ margin: 0, fontSize: 14, opacity: 0.85 }}>{s.title}</p>
+              <SLink key={s.slug} s={s}>
+                <p style={{ margin: 0, fontSize: 14, opacity: 0.85 }}>{s.title}</p>
+              </SLink>
             ))}
           </div>
 
@@ -268,8 +270,10 @@ function ServicesPage() {
           <div id="design" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
             <Eye n="07" label="Design & Drawing" />
             <ul style={{ ...serif, color: C.deep, fontStyle: 'italic', listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, fontSize: 18 }}>
-              {design.services.map((s) => <li key={s.slug}>{s.title}</li>)}
-              <li>Custom Wallpaper Styling</li>
+              {design.services.map((s) => (
+                <li key={s.slug}><SLink s={s}>{s.title}</SLink></li>
+              ))}
+              <li style={{ opacity: 0.7 }}>Custom Wallpaper Styling</li>
             </ul>
           </div>
         </div>

@@ -165,7 +165,9 @@ function ServicesPage() {
             <Eye n="02" label="Ceiling & Walls" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {ceiling.services.map((s) => (
-                <p key={s.slug} style={{ ...serif, color: C.deep, fontSize: 20, margin: 0, lineHeight: 1.25 }}>{s.title}</p>
+                <SLink key={s.slug} s={s}>
+                  <p style={{ ...serif, color: C.deep, fontSize: 20, margin: 0, lineHeight: 1.25 }}>{s.title}</p>
+                </SLink>
               ))}
             </div>
           </div>

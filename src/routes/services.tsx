@@ -51,6 +51,19 @@ function Eye({ n, label }: { n: string; label: string }) {
   return <span style={{ ...eyebrow, ...sans }}>{n} / {label}</span>
 }
 
+function SLink({ s, children, style }: { s: Service; children: React.ReactNode; style?: React.CSSProperties }) {
+  return (
+    <Link
+      to="/services/$slug"
+      params={{ slug: s.slug }}
+      className="sd-svc-link"
+      style={{ color: 'inherit', textDecoration: 'none', ...style }}
+    >
+      {children}
+    </Link>
+  )
+}
+
 function findCat(id: string) {
   return serviceCategories.find((c) => c.id === id)!
 }

@@ -220,10 +220,12 @@ function ServicesPage() {
             <Eye n="04" label="Windows & Glass" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               {windows.services.map((s) => (
-                <div key={s.slug}>
-                  <p style={{ ...serif, color: C.deep, fontSize: 22, margin: '0 0 4px' }}>{s.title}</p>
-                  <p style={{ fontSize: 13, opacity: 0.7, margin: 0 }}>{s.desc}</p>
-                </div>
+                <SLink key={s.slug} s={s}>
+                  <div>
+                    <p style={{ ...serif, color: C.deep, fontSize: 22, margin: '0 0 4px' }}>{s.title}</p>
+                    <p style={{ fontSize: 13, opacity: 0.7, margin: 0 }}>{s.desc}</p>
+                  </div>
+                </SLink>
               ))}
             </div>
           </div>

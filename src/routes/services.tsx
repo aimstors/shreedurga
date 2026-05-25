@@ -236,8 +236,12 @@ function ServicesPage() {
             style={{ ...tile, background: C.ink, color: C.bg, gridColumn: 'span 1 / span 1', minHeight: 180 }}
           >
             <span style={{ ...eyebrow, opacity: 0.5, fontSize: 10 }}>05 / Metal</span>
-            <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2 }}>
-              {metal.services.map((s) => s.title).join(' & ')}
+            <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {metal.services.map((s, i) => (
+                <span key={s.slug}>
+                  <SLink s={s}>{s.title}</SLink>{i < metal.services.length - 1 ? ' &' : ''}
+                </span>
+              ))}
             </p>
           </div>
 

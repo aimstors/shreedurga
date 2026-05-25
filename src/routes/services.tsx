@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
-import { serviceCategories } from '@/lib/services'
+import { serviceCategories, type Service } from '@/lib/services'
 
 const C = {
   bg: '#f5f3ee',

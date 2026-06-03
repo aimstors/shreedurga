@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
-import { allServices, serviceCategories } from '@/lib/services'
+import { allServices, serviceCategories, type Service } from '@/lib/services'
 
 const C = {
   bg: '#f5f3ee',
@@ -218,7 +218,7 @@ function ServiceDetailPage() {
             </Link>
           </div>
           <div className="sd-related">
-            {related.map((r) => {
+            {related.map((r: Service) => {
               const RI = r.icon
               return (
                 <Link

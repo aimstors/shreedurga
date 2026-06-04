@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, MapPin, Check, ArrowRight, MessageCircle, Mail } from 'lucide-react'
+import { Phone, MapPin, Check, ArrowRight, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 import { serviceAreas, serviceAreaIntro } from '@/lib/service-areas'
 
@@ -22,11 +22,12 @@ function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
     setLoading(true)
     window.setTimeout(() => {
       setSuccess(true)
       setLoading(false)
-      e.currentTarget.reset()
+      form.reset()
     }, 350)
   }
 

@@ -23,8 +23,18 @@ function ContactPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
+    const formData = new FormData(form)
+    const firstName = String(formData.get('firstName') ?? '').trim()
+    const lastName = String(formData.get('lastName') ?? '').trim()
+    const phone = String(formData.get('phone') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const message = String(formData.get('message') ?? '').trim()
+    const text = encodeURIComponent(
+      `New consultation request\nName: ${[firstName, lastName].filter(Boolean).join(' ')}\nPhone: ${phone}\nEmail: ${email || 'Not shared'}\nMessage: ${message || 'Please call me back.'}`,
+    )
     setLoading(true)
     window.setTimeout(() => {
+      window.open(`https://wa.me/919435754461?text=${text}`, '_blank', 'noopener,noreferrer')
       setSuccess(true)
       setLoading(false)
       form.reset()

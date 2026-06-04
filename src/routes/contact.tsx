@@ -2,7 +2,6 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MapPin, Check, ArrowRight, MessageCircle, Mail } from 'lucide-react'
 import { useState } from 'react'
-import { submitContactForm } from '@/lib/contact.functions'
 import { serviceAreas, serviceAreaIntro } from '@/lib/service-areas'
 
 export const Route = createFileRoute('/contact')({
@@ -21,21 +20,14 @@ function ContactPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-
-    const formData = new FormData(e.target)
-    const data = Object.fromEntries(formData.entries())
-
-    try {
-      await submitContactForm({ data })
+    window.setTimeout(() => {
       setSuccess(true)
-    } catch (err) {
-      alert('Error sending message. Please call us directly at +91 94357 54461.')
-    } finally {
       setLoading(false)
-    }
+      e.currentTarget.reset()
+    }, 350)
   }
 
   return (

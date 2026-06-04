@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, MapPin, Check, ArrowRight, MessageCircle, Mail } from 'lucide-react'
+import { Phone, MapPin, Check, ArrowRight, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
-import { submitContactForm } from '@/lib/contact.functions'
 import { serviceAreas, serviceAreaIntro } from '@/lib/service-areas'
 
 export const Route = createFileRoute('/contact')({
@@ -21,21 +20,25 @@ function ContactPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const firstName = String(formData.get('firstName') ?? '').trim()
+    const lastName = String(formData.get('lastName') ?? '').trim()
+    const phone = String(formData.get('phone') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const message = String(formData.get('message') ?? '').trim()
+    const text = encodeURIComponent(
+      `New consultation request\nName: ${[firstName, lastName].filter(Boolean).join(' ')}\nPhone: ${phone}\nEmail: ${email || 'Not shared'}\nMessage: ${message || 'Please call me back.'}`,
+    )
     setLoading(true)
-
-    const formData = new FormData(e.target)
-    const data = Object.fromEntries(formData.entries())
-
-    try {
-      await submitContactForm({ data })
+    window.setTimeout(() => {
+      window.open(`https://wa.me/919435754461?text=${text}`, '_blank', 'noopener,noreferrer')
       setSuccess(true)
-    } catch (err) {
-      alert('Error sending message. Please call us directly at +91 94357 54461.')
-    } finally {
       setLoading(false)
-    }
+      form.reset()
+    }, 350)
   }
 
   return (

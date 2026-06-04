@@ -13,6 +13,10 @@ const C = {
 const serif: React.CSSProperties = { fontFamily: "'DM Serif Display', serif" }
 const sans: React.CSSProperties = { fontFamily: "'Fira Sans', sans-serif" }
 
+type ServiceSummary = Omit<Service, 'icon'>
+
+const stripServiceIcon = ({ icon: _icon, ...service }: Service): ServiceSummary => service
+
 export const Route = createFileRoute('/services/$slug')({
   loader: ({ params }) => {
     const service = allServices.find((s) => s.slug === params.slug)
@@ -21,7 +25,11 @@ export const Route = createFileRoute('/services/$slug')({
       c.services.some((s) => s.slug === params.slug),
     )!
     const related = category.services.filter((s) => s.slug !== params.slug).slice(0, 3)
-    return { service, category, related }
+    return {
+      service: stripServiceIcon(service),
+      category: { id: category.id, title: category.title },
+      related: related.map(stripServiceIcon),
+    }
   },
   head: ({ loaderData }) => ({
     meta: loaderData
@@ -69,7 +77,7 @@ const process = [
 
 function ServiceDetailPage() {
   const { service, category, related } = Route.useLoaderData()
-  const Icon = service.icon
+  const Icon = allServices.find((s) => s.slug === service.slug)?.icon ?? Check
 
   return (
     <div style={{ background: C.bg, color: C.ink, ...sans }}>
@@ -218,8 +226,8 @@ function ServiceDetailPage() {
             </Link>
           </div>
           <div className="sd-related">
-            {related.map((r: Service) => {
-              const RI = r.icon
+            {related.map((r: ServiceSummary) => {
+              const RI = allServices.find((s) => s.slug === r.slug)?.icon ?? Check
               return (
                 <Link
                   key={r.slug}

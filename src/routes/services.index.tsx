@@ -102,7 +102,6 @@ function ServicesPage() {
         .sd-svc-link:hover { opacity: 0.6; text-decoration: underline; }
       `}</style>
 
-      {/* Hero */}
       <div style={{ maxWidth: 1280, margin: '0 auto', marginBottom: 72 }}>
         <div style={{ ...eyebrow, marginBottom: 24 }}>
           <Link to="/" className="sd-link-back">Home</Link>
@@ -137,15 +136,9 @@ function ServicesPage() {
         </p>
       </div>
 
-      {/* Bento */}
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div className="sd-bento">
-          {/* 01 Interiors — featured */}
-          <div
-            id="interiors"
-            className="sd-tile-hover"
-            style={{ ...tile, gridColumn: 'span 3 / span 3', gridRow: 'span 2 / span 2', minHeight: 460 }}
-          >
+          <div id="interiors" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 3 / span 3', gridRow: 'span 2 / span 2', minHeight: 460 }}>
             <div>
               <Eye n="01" label="Interiors" />
               <h3 style={{ ...serif, color: C.deep, fontSize: 40, lineHeight: 1.05, margin: '16px 0 0' }}>
@@ -160,7 +153,6 @@ function ServicesPage() {
             </div>
           </div>
 
-          {/* 02 Ceiling */}
           <div id="ceiling-walls" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
             <Eye n="02" label="Ceiling & Walls" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -172,21 +164,10 @@ function ServicesPage() {
             </div>
           </div>
 
-          {/* Decorative deep tile */}
-          <div
-            style={{
-              background: C.deep,
-              padding: 32,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gridColumn: 'span 1 / span 1',
-            }}
-          >
+          <div style={{ background: C.deep, padding: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gridColumn: 'span 1 / span 1' }}>
             <div style={{ width: 1, height: '100%', background: C.bg, opacity: 0.2 }} />
           </div>
 
-          {/* 03 Kitchen & Storage */}
           <div className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 3 / span 3' }}>
             <Eye n="03" label="Kitchen & Storage" />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -205,18 +186,7 @@ function ServicesPage() {
             </div>
           </div>
 
-          {/* 04 Windows */}
-          <div
-            id="windows-glass"
-            style={{
-              ...tile,
-              gridColumn: 'span 2 / span 2',
-              gridRow: 'span 2 / span 2',
-              borderLeft: `1px solid ${C.border}`,
-              borderTop: `1px solid ${C.border}`,
-              minHeight: 460,
-            }}
-          >
+          <div id="windows-glass" style={{ ...tile, gridColumn: 'span 2 / span 2', gridRow: 'span 2 / span 2', borderLeft: `1px solid ${C.border}`, borderTop: `1px solid ${C.border}`, minHeight: 460 }}>
             <Eye n="04" label="Windows & Glass" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               {windows.services.map((s) => (
@@ -230,11 +200,7 @@ function ServicesPage() {
             </div>
           </div>
 
-          {/* 05 Metalwork */}
-          <div
-            id="metal-exterior"
-            style={{ ...tile, background: C.ink, color: C.bg, gridColumn: 'span 1 / span 1', minHeight: 180 }}
-          >
+          <div id="metal-exterior" style={{ ...tile, background: C.ink, color: C.bg, gridColumn: 'span 1 / span 1', minHeight: 180 }}>
             <span style={{ ...eyebrow, opacity: 0.5, fontSize: 10 }}>05 / Metal</span>
             <p style={{ ...serif, fontSize: 18, margin: 0, lineHeight: 1.2, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {metal.services.map((s, i) => (
@@ -245,19 +211,7 @@ function ServicesPage() {
             </p>
           </div>
 
-          {/* 06 Flooring */}
-          <div
-            id="flooring"
-            style={{
-              ...tile,
-              gridColumn: 'span 1 / span 1',
-              justifyContent: 'center',
-              gap: 6,
-              borderBottom: `1px solid ${C.border}`,
-              borderRight: `1px solid ${C.border}`,
-              minHeight: 180,
-            }}
-          >
+          <div id="flooring" style={{ ...tile, gridColumn: 'span 1 / span 1', justifyContent: 'center', gap: 6, borderBottom: `1px solid ${C.border}`, borderRight: `1px solid ${C.border}`, minHeight: 180 }}>
             <Eye n="06" label="Floor" />
             {flooring.services.map((s) => (
               <SLink key={s.slug} s={s}>
@@ -266,7 +220,6 @@ function ServicesPage() {
             ))}
           </div>
 
-          {/* 07 Design & Drawing */}
           <div id="design" className="sd-tile-hover" style={{ ...tile, gridColumn: 'span 2 / span 2' }}>
             <Eye n="07" label="Design & Drawing" />
             <ul style={{ ...serif, color: C.deep, fontStyle: 'italic', listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6, fontSize: 18 }}>
@@ -279,20 +232,7 @@ function ServicesPage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: '96px auto 0',
-          paddingTop: 80,
-          borderTop: `1px solid ${C.ink}1a`,
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 32,
-          alignItems: 'baseline',
-          justifyContent: 'space-between',
-        }}
-      >
+      <div style={{ maxWidth: 1280, margin: '96px auto 0', paddingTop: 80, borderTop: `1px solid ${C.ink}1a`, display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'baseline', justifyContent: 'space-between' }}>
         <div style={{ maxWidth: 560 }}>
           <h2 style={{ ...serif, color: C.deep, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1.05, margin: '0 0 16px' }}>
             Start your transformation.
@@ -301,23 +241,7 @@ function ServicesPage() {
             Serving Tinsukia, Dibrugarh, Pasighat and 9 more districts within 200 km.
           </p>
         </div>
-        <Link
-          to="/contact"
-          className="sd-cta"
-          style={{
-            background: C.deep,
-            color: C.bg,
-            padding: '20px 40px',
-            fontSize: 16,
-            fontWeight: 500,
-            letterSpacing: '0.02em',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 16,
-            textDecoration: 'none',
-            transition: 'transform 0.25s',
-          }}
-        >
+        <Link to="/contact" className="sd-cta" style={{ background: C.deep, color: C.bg, padding: '20px 40px', fontSize: 16, fontWeight: 500, letterSpacing: '0.02em', display: 'inline-flex', alignItems: 'center', gap: 16, textDecoration: 'none', transition: 'transform 0.25s' }}>
           Book a Consultation
           <ArrowRight size={18} style={{ transition: 'transform 0.25s' }} />
         </Link>
